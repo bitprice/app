@@ -3,12 +3,8 @@
 
 # TEAM
 
-  <name> -- <role> -- <twitter>
-
-# THANKS
-
-  <name>
+  Jason Dreyzehner -- concept, design, development -- https://twitter.com/bitjson
 
 # TECHNOLOGY COLOPHON
 
-  HTML5, CSS3
+  HTML5, CSS3, HTTP, Electricity, Synergy, Magic Internet Money 

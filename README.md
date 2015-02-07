@@ -1,2 +1,3 @@
 # bitprice.github.io
-the bit price
+
+The BitPrice website.

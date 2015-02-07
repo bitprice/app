@@ -1,14 +1,14 @@
 {
-  "version": "1.0.0",
-  "name": "Web Starter Kit",
+  "version": "0.1",
+  "name": "BitPrice",
   "launch_path": "/index.html",
-  "description": "A front-end template that helps you build fast, modern mobile web apps.",
+  "description": "The bit price.",
   "icons": {
     "128": "/images/touch/icon-128x128.png"
   },
   "developer": {
-    "name": "",
-    "url": ""
+    "name": "Jason Dreyzehner",
+    "url": "https://twitter.com/bitjson"
   },
   "installs_allowed_from": [
     "*"
@@ -18,8 +18,8 @@
   },
   "locales": {
     "en": {
-      "name": "Web Starter Kit",
-      "description": "A front-end template that helps you build fast, modern mobile web apps."
+      "name": "BitPrice",
+      "description": "The bit price."
     }
   }
 }
