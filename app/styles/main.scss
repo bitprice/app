@@ -3,3 +3,42 @@
 @import 'reset';
 
 //unorganized:
+
+//structure
+.app-wrapper {
+  min-height: 100%;
+  display:flex;
+  flex-flow: column nowrap;
+  justify-content:space-between;
+
+  background: #E29A27;
+  background-image: radial-gradient(center, ellipse cover, #F5AB35 50%, #E29A27 100%);
+
+  &, a {
+    color: #fff;
+    text-shadow: 0px 2px 4px rgba(0,0,0,0.13);
+  }
+}
+
+.app-section {
+  flex: 1 auto;
+  text-align: center;
+}
+
+.flex-bigger {
+  flex-grow: 2;
+}
+
+//components
+
+.price {
+  font-size: 54px;
+  line-height: 66px;
+}
+
+
+//utils
+
+.bold {
+  font-weight: bold;
+}
