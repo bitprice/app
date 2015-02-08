@@ -44,8 +44,9 @@
   align-self: center;
 }
 
-.view-title {
+.view-title-container {
   margin: 0;
+  font-size: calc(1em + 2vw);
 }
 
 .navicon{
@@ -63,15 +64,22 @@
   }
 }
 
+.valued-in-text {
+  //old android fallback
+  font-size: 1.1em;
+  font-size: calc(1.1em + 1vw);
+}
+
 .price {
-  font-size: 54px;
-  line-height: 76px;
+  //old android fallback
+  font-size: 2em;
+  font-size: calc(2em + 10vw);
 }
 
 .text-link {
   border-bottom: 1px solid rgba(255,255,255, 0.5);
   padding-bottom: 3px;
-  margin: 5px 0 15px;
+  margin: .5em 0 1em;
   display: inline-block;
 }
 

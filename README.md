@@ -6,7 +6,7 @@
 
 > Bitcoin protects consumers from identity theft, makes banking more efficient and accessible, reduces transaction costs, and eliminates the risk of payment fraud.
 
-> The Bitcoin network is supported by thousands of companies and millions of users worldwide. Its scarcity is guaranteed by some simple math built into the globally-shared bitcoin software; no more than 21 trillion bits — the primary currency unit — can exist at one time. One bit can be divided into 100 satoshi.
+> The Bitcoin network is supported by thousands of companies and millions of users worldwide. Its scarcity is guaranteed by some simple math built into the globally-shared bitcoin software; no more than 21 trillion bits — the primary currency unit — can exist at one time.
 
 [BitPrice.io](http://bitprice.io) uses the [BBB](https://bitpay.com/bitcoin-exchange-rates) to calculate the bit price in real time.
 
