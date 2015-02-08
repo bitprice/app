@@ -1,6 +1,6 @@
 # BitPrice App
 
-BitPrice by [@bitjson](https://twitter.com/bitjson).
+Feedback is appreciated — message me [@bitjson](https://twitter.com/bitjson). Pull requests welcome!
 
 ## Developing
 
