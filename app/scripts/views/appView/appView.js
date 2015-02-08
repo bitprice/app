@@ -5,13 +5,13 @@ angular.module('bitPrice.appView', [
   'bitPrice.price'
 ])
 
-.config(['$routeProvider', function($routeProvider) {
+.config(['$routeProvider', function ($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: 'scripts/views/appView/appView.html',
     controller: 'appViewController'
   });
 }])
 
-.controller('appViewController', ['$scope', function($scope) {
+.controller('appViewController', ['$scope', function ($scope) {
 
 }]);

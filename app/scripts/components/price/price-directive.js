@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('bitPrice.price.priceDirective', [])
+angular.module('bitPrice.price.priceDirective', ['bitPrice.price.ratesService'])
 
-.directive('price', ['$interval', 'ratesService', function($interval, ratesService) {
+.directive('price', ['$interval', 'ratesService', function ($interval, ratesService) {
 
   function link(scope, element, attrs) {
     var XBTperBTC = 1000000;

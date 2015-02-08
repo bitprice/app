@@ -2,7 +2,7 @@
 
 angular.module('bitPrice.price.ratesService', [])
 
-.service('ratesService', function($http) {
+.service('ratesService', ['$http', function ($http) {
   var bitpayRatesAPI = 'https://bitpay.com/rates';
   var ratesAPI = bitpayRatesAPI;
 
@@ -12,4 +12,4 @@ angular.module('bitPrice.price.ratesService', [])
         console.error('Error fetching rates from: ' + ratesAPI + '. Status ' + status);
       });
   };
-});
+}]);
