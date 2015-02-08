@@ -1,8 +1,11 @@
 'use strict';
 
-angular.module('bitPrice.price.priceDirective', ['bitPrice.price.ratesService'])
+angular.module('bitPrice.price.priceDirective', [
+  'bitPrice.price.ratesService',
+  'bitPrice.price.subcentsFilter'
+])
 
-.directive('price', ['$interval', 'ratesService', function ($interval, ratesService) {
+.directive('price', ['$interval', 'ratesService', 'subcentsFilter', 'currencyFilter', function ($interval, ratesService, subcentsFilter, currencyFilter) {
 
   function link(scope, element, attrs) {
     var XBTperBTC = 1000000;
@@ -40,10 +43,12 @@ angular.module('bitPrice.price.priceDirective', ['bitPrice.price.ratesService'])
         //bitcoinRate is the number of searchCode units equivalent to 1 BTC
         if(currencyCode === 'XBT') {
           rate = bitcoinRate / XBTperBTC;
+          element.text(subcentsFilter(rate));
         } else {
           rate = 1 / bitcoinRate * XBTperBTC;
+          element.text(currencyFilter(rate, '', 0) + ' bits');
         }
-        element.text(rate);
+
       });
     }
   }
