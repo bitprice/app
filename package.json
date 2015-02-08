@@ -1,4 +1,10 @@
 {
+  "name": "bitprice",
+  "version": "0.0.1",
+  "description": "The real-time bit price.",
+  "author": "Jason Dreyzehner <jason@bitpay.com>",
+  "repository": "https://github.com/bitprice/app",
+  "license": "MIT",
   "devDependencies": {
     "apache-server-configs": "^2.7.1",
     "browser-sync": "^1.3.0",

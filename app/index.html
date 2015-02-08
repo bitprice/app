@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="">
+<html lang="en" ng-app="bitPrice">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="description" content="The real-time Bit price.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BitPrice</title>
 
@@ -21,39 +21,31 @@
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
 
+    <!-- TODO: social assets – Reddit, Twitter, Facebook, G+ -->
+
     <link rel="stylesheet" href="styles/main.css">
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <div class="vertical-wrapper vertical-wrapper--theme-bit">
-      <div class="flex-item center-contents">
-        <h1 class="view-title-container">
-          <button class="navicon-button invisible">
-            <img class="navicon-img" src="images/navicon.svg" alt="Menu">
-          </button>
-          <span class="view-title">Bit Price</span>
-        </h1>
-      </div>
-      <div class="flex-item flex-bigger center-contents">
-        <div class="valued-in-text">1 Bit valued in USD is</div>
-        <div class="price bold">.0258&cent;</div>
-        <div><a class="text-link invisible" href="#">What's this?</a></div>
-      </div>
-      <div class="flex-item center-contents invisible">
-        <div>[social cta]</div>
-      </div>
-      <div class="flex-item center-contents">
-        <div><a class="text-link" href="https://twitter.com/bitjson">@bitjson</a></div>
-        <div>
-          <a href="https://github.com/bitprice/app">
-            <img class="github-img" src="images/github.svg" alt="Menu">
-          </a>
-        </div>
-      </div>
-    </div>
+    <div class="full-height" ng-view></div>
 
-    <!-- build:js scripts/main.min.js -->
-    <script src="scripts/main.js"></script>
+    <!-- TODO: use for dist build
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular-route.min.js"></script>
+    -->
+
+    <!-- TODO: remove from dist build -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.12/angular-route.js"></script>
+
+    <!-- build:js scripts/app.min.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/views/appView/appView.js"></script>
+    <script src="scripts/components/price/price.js"></script>
+    <script src="scripts/components/price/price-service.js"></script>
+    <script src="scripts/components/price/price-directive.js"></script>
     <!-- endbuild -->
 
     <script>
