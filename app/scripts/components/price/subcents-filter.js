@@ -4,8 +4,7 @@ angular.module('bitPrice.price.subcentsFilter', [])
 
 .filter('subcents', function() {
   return function(input) {
-    var number = Number(input),
-        output;
+    var number = Number(input);
 
     if(number > 1) {
       //display value in dollars
