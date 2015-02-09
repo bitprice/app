@@ -4,6 +4,7 @@
   "launch_path": "/index.html",
   "description": "The bit price.",
   "icons": {
+    "512": "/images/touch/icon-512x512.png",
     "128": "/images/touch/icon-128x128.png"
   },
   "developer": {
@@ -19,7 +20,7 @@
   "locales": {
     "en": {
       "name": "BitPrice",
-      "description": "The bit price."
+      "description": "The real-time Bit price."
     }
   }
 }
