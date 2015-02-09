@@ -37,7 +37,7 @@ This includes linting as well as image, script, stylesheet and HTML optimization
 $ gulp pagespeed
 ```
 
-Runs the deployed (public) version of your site against the [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) API to help you stay on top of where you can improve.
+Runs [bitprice.io](http://bitprice.io) against the [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) API to stay on top of where we can improve.
 
 ### Deploy to gh-pages
 
