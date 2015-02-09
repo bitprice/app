@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/bitprice/app.png?label=ready&title=Ready)](https://waffle.io/bitprice/app)
 # BitPrice App
 
 ### The real-time BitPrice.
