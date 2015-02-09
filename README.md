@@ -28,7 +28,7 @@ $ gulp serve
 $ gulp
 ```
 
-Build and optimize the current project, ready for deployment.
+Build and optimize the app, ready for deployment.
 This includes linting as well as image, script, stylesheet and HTML optimization and minification.
 
 ### Performance Insights
