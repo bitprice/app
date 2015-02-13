@@ -32,6 +32,14 @@ $ gulp
 Build and optimize the app, ready for deployment.
 This includes linting as well as image, script, stylesheet and HTML optimization and minification.
 
+### Serve Production Build
+
+```sh
+$ gulp serve:dist
+```
+
+Serve the optimized and minified version of the app for local testing.
+
 ### Performance Insights
 
 ```sh

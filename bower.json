@@ -1,0 +1,15 @@
+{
+  "name": "bitPrice",
+  "version": "0.0.1",
+  "homepage": "https://github.com/bitprice/app",
+  "authors": [
+    "Jason Dreyzehner <jason@bitpay.com>"
+  ],
+  "description": "The real-time Bit price.",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.3.13",
+    "angular-route": "~1.3.13"
+  }
+}
