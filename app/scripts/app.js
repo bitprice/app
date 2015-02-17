@@ -5,6 +5,7 @@ angular.module('bitPrice', [
   'bitPrice.appView'
 ])
 
-.config(['$routeProvider', function($routeProvider) {
+.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
+  $locationProvider.html5Mode(true);
   $routeProvider.otherwise({redirectTo: '/'});
 }]);

@@ -53,6 +53,14 @@ gulp.task('copy', function () {
     .pipe($.size({title: 'copy'}));
 });
 
+// Duplicate index.html as 404.html for angular HTML5 mode on GitHub pages
+gulp.task('make-404', ['html'], function () {
+  return gulp.src('dist/index.html')
+    .pipe($.rename('404.html'))
+    .pipe(gulp.dest('dist'))
+    .pipe($.size({title: 'make-404'}));
+});
+
 // Copy Web Fonts To Dist
 gulp.task('fonts', function () {
   return gulp.src(['app/fonts/**'])
@@ -130,7 +138,19 @@ gulp.task('serve', ['styles'], function () {
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
-    server: ['.tmp', 'app']
+    server: {
+      baseDir: ['.tmp', 'app'],
+      //serve index.html for all routes without file extensions (sim for HTML 5 mode)
+      middleware: [
+        function (req, res, next) {
+          if (req.url.indexOf('.') > -1) {
+            return next();
+          } else {
+            require('fs').createReadStream('app/index.html').pipe(res);
+          }
+        }
+      ]
+    }
   });
 
   gulp.watch(['app/**/*.html'], reload);
@@ -147,13 +167,25 @@ gulp.task('serve:dist', ['default'], function () {
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
-    server: 'dist'
+    server: {
+      baseDir: 'dist',
+      //sim HTML5 mode with GitHub pages 404 routing
+      middleware: [
+        function (req, res, next) {
+          if (req.url.indexOf('.') > -1) {
+            return next();
+          } else {
+            require('fs').createReadStream('dist/404.html').pipe(res);
+          }
+        }
+      ]
+    }
   });
 });
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', ['jshint', 'html', 'images', 'fonts', 'copy'], cb);
+  runSequence('styles', ['jshint', 'html', 'images', 'fonts', 'copy', 'make-404'], cb);
 });
 
 // Run PageSpeed Insights
