@@ -24,3 +24,7 @@ body {
 a {
   text-decoration: none;
 }
+
+body, a {
+  text-shadow: $shadow;
+}

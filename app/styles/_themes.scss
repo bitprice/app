@@ -3,6 +3,8 @@
   background-image: radial-gradient(center, ellipse cover, #F5AB35 50%, #E29A27 100%);
   &, a {
     color: #fff;
-    text-shadow: 0px 2px 4px rgba(0,0,0,0.13);
+  }
+  .tooltip {
+    color: #F5AB35;
   }
 }

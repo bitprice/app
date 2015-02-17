@@ -2,7 +2,8 @@
 
 angular.module('bitPrice.appView', [
   'ngRoute',
-  'bitPrice.price'
+  'bitPrice.price',
+  'bitPrice.tweetButton'
 ])
 
 .config(['$routeProvider', function ($routeProvider) {
@@ -13,5 +14,10 @@ angular.module('bitPrice.appView', [
 }])
 
 .controller('appViewController', ['$scope', function ($scope) {
-
+  $scope.tweetInfo = {
+    url: 'http://bitprice.io/',
+    via: 'BitPrice_io',
+    text: 'The real-time Bit price.',
+    related: 'bitjson'
+  };
 }]);

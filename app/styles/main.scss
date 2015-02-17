@@ -1,6 +1,8 @@
+$shadow: 0 2px 4px rgba(0,0,0,0.13);
+
 @import 'h5bp';
 @import 'normalize';
-@import 'reset';
+@import 'elements';
 @import 'themes';
 @import 'utils';
 
@@ -87,6 +89,47 @@
   display: inline-block;
 }
 
-.github-img {
-  height: 1em;
+.tooltip {
+  display: inline-block;
+  background-color: #fff;
+  font-size: .8em;
+  padding: .5em 1em;
+  margin-bottom: 1em;
+  text-shadow: none;
+  border-radius: 2px;
+  &:before {
+    content: '';
+    border: solid;
+    border-width: .5em .5em 0px .5em;
+    border-color: #FFFFFF transparent;
+    position: absolute;
+    left: 50%;
+    left: calc(50% - .5em);
+    margin-top: 1.9em;
+  }
+}
+
+.button {
+  display: inline-block;
+  border: 1px solid #fff;
+  padding: .3em 1em;
+  border-radius: 2px;
+  box-shadow: $shadow, inset $shadow;
+  opacity: .8;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+  }
+  &:active {
+    box-shadow: none;
+    text-shadow: none;
+  }
+}
+
+.img-shadow {
+  filter: drop-shadow($shadow);
+}
+
+.inline-img {
+  height: .8em;
 }
