@@ -30,7 +30,6 @@ angular.module('bitPrice.tweetButton.tweetButtonDirective', [
         //var countJsonURL = 'https://cdn.api.twitter.com/1/urls/count.json';
         tweetCountService.getCount(scope.url).then(function(response) {
           scope.shareCount = response.data.count;
-          console.log('updated share count.');
         });
       }
 
