@@ -1,6 +1,5 @@
 'use strict';
 
-// Include Gulp & Tools We'll Use
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var del = require('del');
@@ -21,7 +20,6 @@ var AUTOPREFIXER_BROWSERS = [
   'bb >= 10'
 ];
 
-// Lint JavaScript
 gulp.task('jshint', function () {
   return gulp.src('app/scripts/**/*.js')
     .pipe(reload({stream: true, once: true}))
@@ -30,7 +28,6 @@ gulp.task('jshint', function () {
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
 });
 
-// Optimize Images
 gulp.task('images', function () {
   return gulp.src('app/images/**/*')
     .pipe($.cache($.imagemin({
@@ -41,12 +38,11 @@ gulp.task('images', function () {
     .pipe($.size({title: 'images'}));
 });
 
-// Copy All Files At The Root Level (app)
+// Copy root level files from `app` to `dist`
 gulp.task('copy', function () {
   return gulp.src([
     'app/*',
-    '!app/*.html',
-    'node_modules/apache-server-configs/dist/.htaccess'
+    '!app/*.html'
   ], {
     dot: true
   }).pipe(gulp.dest('dist'))
@@ -61,7 +57,6 @@ gulp.task('make-404', ['html'], function () {
     .pipe($.size({title: 'make-404'}));
 });
 
-// Compile and Automatically Prefix Stylesheets
 gulp.task('styles', function () {
   // For best performance, don't add Sass partials to `gulp.src`
   return gulp.src([
@@ -82,45 +77,37 @@ gulp.task('styles', function () {
     .pipe($.size({title: 'styles'}));
 });
 
-// Scan Your HTML For Assets & Optimize Them
+// Scan html for assets - clean, concat, minify
 gulp.task('html', function () {
   var assets = $.useref.assets({searchPath: '{.tmp,app}'});
 
   return gulp.src('app/**/*.html')
     .pipe(assets)
-    // Concatenate And Minify JavaScript
+    // Concat & minify js
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-    // Remove Any Unused CSS
+    // Remove Any Unused css
     .pipe($.if('*.css', $.uncss({
       html: [
         'app/**/*.html'
       ]
     })))
-    // Concatenate And Minify Styles
-    // In case you are still using useref build blocks
+    // Concat & minify css
+    // useref build blocks
     .pipe($.if('*.css', $.csso()))
     .pipe(assets.restore())
     .pipe($.useref())
-    // Update Production Style Guide Paths
-    .pipe($.replace('components/components.css', 'components/main.min.css'))
-    // Minify Any HTML
     .pipe($.if('*.html', $.minifyHtml()))
-    // Output Files
     .pipe(gulp.dest('dist'))
     .pipe($.size({title: 'html'}));
 });
 
-// Clean Output Directory
+// Clean the build directories
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-// Watch Files For Changes & Reload
+// Watch for changes & reload
 gulp.task('serve', ['styles'], function () {
   browserSync({
     notify: false,
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
     server: {
       baseDir: ['.tmp', 'app'],
       //serve index.html for all routes without file extensions (sim for HTML 5 mode)
@@ -146,10 +133,6 @@ gulp.task('serve', ['styles'], function () {
 gulp.task('serve:dist', ['default'], function () {
   browserSync({
     notify: false,
-    // Run as an https by uncommenting 'https: true'
-    // Note: this uses an unsigned certificate which on first access
-    //       will present a certificate warning in the browser.
-    // https: true,
     server: {
       baseDir: 'dist',
       //sim HTML5 mode with GitHub pages 404 routing
@@ -166,18 +149,12 @@ gulp.task('serve:dist', ['default'], function () {
   });
 });
 
-// Build Production Files, the Default Task
+// Build for production
 gulp.task('default', ['clean'], function (cb) {
   runSequence('styles', ['jshint', 'html', 'images', 'copy', 'make-404'], cb);
 });
 
-// Run PageSpeed Insights
-// Update `url` below to the public URL for your site
 gulp.task('pagespeed', pagespeed.bind(null, {
-  // By default, we use the PageSpeed Insights
-  // free (no API key) tier. You can use a Google
-  // Developer API key if you have one. See
-  // http://goo.gl/RkN0vE for info key: 'YOUR_API_KEY'
   url: 'http://bitprice.io',
   strategy: 'mobile'
 }));
