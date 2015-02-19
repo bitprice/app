@@ -61,29 +61,20 @@ gulp.task('make-404', ['html'], function () {
     .pipe($.size({title: 'make-404'}));
 });
 
-// Copy Web Fonts To Dist
-gulp.task('fonts', function () {
-  return gulp.src(['app/fonts/**'])
-    .pipe(gulp.dest('dist/fonts'))
-    .pipe($.size({title: 'fonts'}));
-});
-
 // Compile and Automatically Prefix Stylesheets
 gulp.task('styles', function () {
   // For best performance, don't add Sass partials to `gulp.src`
   return gulp.src([
-      'app/styles/*.scss',
-      'app/styles/**/*.css',
-      'app/styles/components/components.scss'
+      'app/styles/main.scss'
     ])
-    .pipe($.changed('styles', {extension: '.scss'}))
-    .pipe($.rubySass({
-        style: 'expanded',
-        precision: 10
-      })
-      .on('error', console.error.bind(console))
-    )
+    .pipe($.sourcemaps.init())
+    .pipe($.changed('.tmp/styles', {extension: '.css'}))
+    .pipe($.sass({
+        precision: 10,
+        onError: console.error.bind(console, 'Sass error:')
+      }))
     .pipe($.autoprefixer(AUTOPREFIXER_BROWSERS))
+    .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))
     // Concatenate And Minify Styles
     .pipe($.if('*.css', $.csso()))
@@ -100,17 +91,9 @@ gulp.task('html', function () {
     // Concatenate And Minify JavaScript
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
     // Remove Any Unused CSS
-    // Note: If not using the Style Guide, you can delete it from
-    // the next line to only include styles your project uses.
     .pipe($.if('*.css', $.uncss({
       html: [
-        'app/index.html',
-        'app/styleguide.html'
-      ],
-      // CSS Selectors for UnCSS to ignore
-      ignore: [
-        /.navdrawer-container.open/,
-        /.app-bar.open/
+        'app/**/*.html'
       ]
     })))
     // Concatenate And Minify Styles
@@ -185,7 +168,7 @@ gulp.task('serve:dist', ['default'], function () {
 
 // Build Production Files, the Default Task
 gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', ['jshint', 'html', 'images', 'fonts', 'copy', 'make-404'], cb);
+  runSequence('styles', ['jshint', 'html', 'images', 'copy', 'make-404'], cb);
 });
 
 // Run PageSpeed Insights
