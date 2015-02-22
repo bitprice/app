@@ -39,7 +39,6 @@ $shadow: 0 2px 4px rgba(0,0,0,0.13);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  @extend .center;
 }
 
 //components
@@ -132,4 +131,9 @@ $shadow: 0 2px 4px rgba(0,0,0,0.13);
 
 .inline-img {
   height: .8em;
+}
+
+.info-area {
+  max-width: 600px;
+  margin: auto;
 }
