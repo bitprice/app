@@ -2,6 +2,7 @@
 
 angular.module('bitPrice', [
   'ui.router',
+  'ngAnimate',
   'bitPrice.appView',
   'bitPrice.infoView'
 ])
