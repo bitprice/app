@@ -15,23 +15,16 @@ angular.module('bitPrice.tweetButton.tweetButtonDirective', [
       related: '@'
     },
     link: function (scope, element, attrs) {
-      scope.shareCount = '—';
-      updateCount();
 
-      var shareCountGetter = $interval(function() {
-        updateCount();
-      }, 30000);
+      tweetCountService.addURL(scope.url);
 
-      element.on('$destroy', function() {
-        $interval.cancel(shareCountGetter);
-      });
-
-      function updateCount() {
-        //var countJsonURL = 'https://cdn.api.twitter.com/1/urls/count.json';
-        tweetCountService.getCount(scope.url).then(function(response) {
-          scope.shareCount = response.data.count;
-        });
-      }
+      scope.shareCount = function(){
+        var count = tweetCountService.getCount(scope.url);
+        if(count === 0){
+          return '';
+        }
+        return count;
+      };
 
       var getShareURL = function(){
         var shareURL = 'https://twitter.com/share';
