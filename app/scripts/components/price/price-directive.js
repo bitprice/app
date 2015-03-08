@@ -7,6 +7,8 @@ angular.module('bitPrice.price.priceDirective', [
 
 .directive('price', ['ratesService', 'subcentsFilter', 'currencyFilter', function (ratesService, subcentsFilter, currencyFilter) {
 
+  var nonbreakingSpace = '\u00A0';
+
   return {
     restrict: 'E',
     scope: {
@@ -18,6 +20,9 @@ angular.module('bitPrice.price.priceDirective', [
 
       scope.price = function(){
         var rate = ratesService.getRate(scope.currency, scope.valuedIn);
+        if(!rate){
+          return nonbreakingSpace;
+        }
         if(scope.valuedIn === 'XBT') {
           return currencyFilter(rate, '', 0) + ' bits';
         }
