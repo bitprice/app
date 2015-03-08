@@ -18,7 +18,6 @@ angular.module('bitPrice.price.priceDirective', [
 
       scope.price = function(){
         var rate = ratesService.getRate(scope.currency, scope.valuedIn);
-        console.log('hit');
         if(scope.valuedIn === 'XBT') {
           return currencyFilter(rate, '', 0) + ' bits';
         }
