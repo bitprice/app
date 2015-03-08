@@ -1,1 +1,1 @@
-<div><div><div class=tooltip>shared {{shareCount | number}} times</div></div><a class=button ng-click=share()><img class="inline-img img-shadow" src=images/twitter.svg> tweet</a></div>
+<div><div><ng-pluralize class=tooltip count=shareCount() when="{ '0': 'share this', '1': 'share this', 'other': 'shared {{shareCount() | number}} times'}">&nbsp;</ng-pluralize></div><a class=button ng-click=share()><img class="inline-img img-shadow" src=images/twitter.svg> tweet</a></div>
