@@ -8,17 +8,10 @@ var browserSync = require('browser-sync');
 var pagespeed = require('psi');
 var reload = browserSync.reload;
 
-var AUTOPREFIXER_BROWSERS = [
-  'ie >= 10',
-  'ie_mob >= 10',
-  'ff >= 30',
-  'chrome >= 34',
-  'safari >= 7',
-  'opera >= 23',
-  'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
-];
+// Build for production
+gulp.task('default', ['clean'], function (cb) {
+  runSequence('styles', ['jshint', 'html', 'images', 'copy', 'make-404'], cb);
+});
 
 gulp.task('jshint', function () {
   return gulp.src('app/scripts/**/*.js')
@@ -26,6 +19,31 @@ gulp.task('jshint', function () {
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
+});
+
+
+// Scan html for assets - clean, concat, minify
+gulp.task('html', function () {
+  var assets = $.useref.assets({searchPath: '{.tmp,app}'});
+
+  return gulp.src('app/**/*.html')
+    .pipe(assets)
+    // Concat & minify js
+    .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
+    // Remove Any Unused css
+    .pipe($.if('*.css', $.uncss({
+      html: [
+        'app/**/*.html'
+      ]
+    })))
+    // Concat & minify css
+    // useref build blocks
+    .pipe($.if('*.css', $.csso()))
+    .pipe(assets.restore())
+    .pipe($.useref())
+    .pipe($.if('*.html', $.minifyHtml()))
+    .pipe(gulp.dest('dist'))
+    .pipe($.size({title: 'html'}));
 });
 
 gulp.task('images', function () {
@@ -58,6 +76,18 @@ gulp.task('make-404', ['html'], function () {
 });
 
 gulp.task('styles', function () {
+  var AUTOPREFIXER_BROWSERS = [
+    'ie >= 10',
+    'ie_mob >= 10',
+    'ff >= 30',
+    'chrome >= 34',
+    'safari >= 7',
+    'opera >= 23',
+    'ios >= 7',
+    'android >= 4.4',
+    'bb >= 10'
+  ];
+
   // For best performance, don't add Sass partials to `gulp.src`
   return gulp.src([
       'app/styles/main.scss'
@@ -74,30 +104,6 @@ gulp.task('styles', function () {
     .pipe($.if('*.css', $.csso()))
     .pipe(gulp.dest('dist/styles'))
     .pipe($.size({title: 'styles'}));
-});
-
-// Scan html for assets - clean, concat, minify
-gulp.task('html', function () {
-  var assets = $.useref.assets({searchPath: '{.tmp,app}'});
-
-  return gulp.src('app/**/*.html')
-    .pipe(assets)
-    // Concat & minify js
-    .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-    // Remove Any Unused css
-    .pipe($.if('*.css', $.uncss({
-      html: [
-        'app/**/*.html'
-      ]
-    })))
-    // Concat & minify css
-    // useref build blocks
-    .pipe($.if('*.css', $.csso()))
-    .pipe(assets.restore())
-    .pipe($.useref())
-    .pipe($.if('*.html', $.minifyHtml()))
-    .pipe(gulp.dest('dist'))
-    .pipe($.size({title: 'html'}));
 });
 
 // Clean the build directories
@@ -148,15 +154,15 @@ gulp.task('serve:dist', ['default'], function () {
   });
 });
 
-// Build for production
-gulp.task('default', ['clean'], function (cb) {
-  runSequence('styles', ['jshint', 'html', 'images', 'copy', 'make-404'], cb);
-});
-
 gulp.task('pagespeed', pagespeed.bind(null, {
   url: 'http://bitprice.io',
   strategy: 'mobile'
 }));
 
 // Load custom tasks from the `tasks` directory
-try { require('require-dir')('tasks'); } catch (err) { console.error(err); }
+var tasks;
+try {
+  tasks = require('require-dir')('tasks');
+} catch (err) {
+  console.error(err);
+}
