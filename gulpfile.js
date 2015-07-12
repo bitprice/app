@@ -5,7 +5,6 @@ var $ = require('gulp-load-plugins')();
 var del = require('del');
 var runSequence = require('run-sequence');
 var browserSync = require('browser-sync');
-var pagespeed = require('psi');
 var reload = browserSync.reload;
 
 // Build for production
@@ -30,12 +29,6 @@ gulp.task('html', function () {
     .pipe(assets)
     // Concat & minify js
     .pipe($.if('*.js', $.uglify({preserveComments: 'some'})))
-    // Remove Any Unused css
-    .pipe($.if('*.css', $.uncss({
-      html: [
-        'app/**/*.html'
-      ]
-    })))
     // Concat & minify css
     // useref build blocks
     .pipe($.if('*.css', $.csso()))
@@ -48,10 +41,10 @@ gulp.task('html', function () {
 
 gulp.task('images', function () {
   return gulp.src('app/images/**/*')
-    .pipe($.cache($.imagemin({
+    .pipe($.imagemin({
       progressive: true,
       interlaced: true
-    })))
+    }))
     .pipe(gulp.dest('dist/images'))
     .pipe($.size({title: 'images'}));
 });
@@ -153,11 +146,6 @@ gulp.task('serve:dist', ['default'], function () {
     }
   });
 });
-
-gulp.task('pagespeed', pagespeed.bind(null, {
-  url: 'http://bitprice.io',
-  strategy: 'mobile'
-}));
 
 // Load custom tasks from the `tasks` directory
 var tasks;
